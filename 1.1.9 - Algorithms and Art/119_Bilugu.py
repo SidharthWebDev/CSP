@@ -9,6 +9,7 @@ pen_size = input("Enter how big you want the pen to be.")
 fill_color = input("What color do you want the body to be?")
 
 #Create a spider body
+spooder.pencolor(fill_color)
 spooder.pensize(pen_size)
 spooder.fillcolor(fill_color)
 spooder.begin_fill()
@@ -18,15 +19,20 @@ spooder.end_fill()
 
 #Configure spider legs
 legs = 8
-leg_length = int(input("How long do you want the legs to be?"))
+leg_length_list = [120, 140, 160, 180, 200, 220, 240, 260, 280, 300]
+leg_length = int(input("Pick a number from 1 to 10."))
 leg_angle = 160 / legs
 spooder.pensize(pen_size)
 spooder.setheading(330)
 #######################
 
+#Ask user for leg color
+leg_color = input("What color do you want the legs to be?")
+
 #Draw spider legs
 leg = 0
 while (leg < legs):
+  spooder.pencolor(leg_color)
   spooder.penup()
   spooder.goto(0,80)
   spooder.pendown()
@@ -34,7 +40,7 @@ while (leg < legs):
   if (leg<4):
    spooder.setheading(leg_angle*leg-30)
    spooder.circle(-leg_length,60)
-  else: 
+  else:
    spooder.setheading(leg_angle*leg+70)
    spooder.circle(leg_length,60)
   spooder.penup()
