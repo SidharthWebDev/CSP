@@ -4,8 +4,14 @@ import turtle as trtl
 # a less useful variable name x is used
 spooder = trtl.Turtle()
 
+trtl.addshape("mark",((-5,5), (-1,0), (-5,-5), (5,-5), (1,0), (5,5)))
+
+spooder.shape("mark")
+
 #Ask user about pen size
 pen_size = input("Enter how big you want the pen to be.")
+
+#Ask user about pencolor and fillcolor
 fill_color = input("What color do you want the body to be?")
 
 #Create a spider body
@@ -20,7 +26,8 @@ spooder.end_fill()
 #Configure spider legs
 legs = 8
 leg_length_list = [120, 140, 160, 180, 200, 220, 240, 260, 280, 300]
-leg_length = int(input("Pick a number from 1 to 10."))
+choice = int(input("Pick a number from 1-10."))
+leg_length = leg_length_list[choice - 1]
 leg_angle = 160 / legs
 spooder.pensize(pen_size)
 spooder.setheading(330)
