@@ -1,5 +1,5 @@
-#Primary TODO's: Develop main game screen, establish enemy function, add Base HP,  add game timer, add score counter, establish base player damage
-#Imports
+#Primary TODO's: Import necessary imports, add essential game variables, create the background
+
 import turtle as trtl
 import random as rand
 
@@ -17,3 +17,14 @@ available_enemy_types = ["E1", "E2", "E3", "Boss"]
 difficulty_bonus = 0
 length_bonus = 0
 Base_Damage = 5
+
+#Storage For Difficulty Selection
+chosen_lanes_temp = []
+chosen_enemies_temp = []
+chosen_spawn_interval_temp = 1000
+
+#Background
+wn = trtl.Screen()
+wn.tracer(False)
+wn.title("Click-Defense Game")
+wn.bgcolor("black")
