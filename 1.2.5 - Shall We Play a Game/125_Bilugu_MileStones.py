@@ -40,3 +40,13 @@ Lane_Drawer.hideturtle()
 Lane_Drawer.color("red")
 Lane_Drawer.pensize(1)
 Lane_Drawer.speed(0)
+
+#Draw Lanes
+def Draw_Lanes():
+    Lane_Drawer.clear()
+    Lane_Drawer.penup()
+    for y in Lanes:
+        Lane_Drawer.goto(-300, y)
+        Lane_Drawer.pendown()
+        Lane_Drawer.goto(300, y)
+        Lane_Drawer.penup()
