@@ -28,3 +28,9 @@ wn = trtl.Screen()
 wn.tracer(False)
 wn.title("Click-Defense Game")
 wn.bgcolor("black")
+
+#Writer
+writer = trtl.Turtle()
+writer.hideturtle()
+writer.color("white")
+writer.penup()
