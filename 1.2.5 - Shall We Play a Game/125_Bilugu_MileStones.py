@@ -50,3 +50,21 @@ def Draw_Lanes():
         Lane_Drawer.pendown()
         Lane_Drawer.goto(300, y)
         Lane_Drawer.penup()
+
+#Secondary TODO's: Enemy functions
+
+#Enemy Classification
+class Enemy:
+    def __init__(self, hp, speed, damage, value, color):
+        self.hp = hp
+        self.speed = speed
+        self.damage = damage
+        self.value = value
+        self.t = trtl.Turtle()
+        self.t.shape("circle")
+        self.t.color(color)
+        self.t.penup()
+        self.t.speed(0)
+        self.spawn()
+        self.t.onclick(self.hit)
+        
