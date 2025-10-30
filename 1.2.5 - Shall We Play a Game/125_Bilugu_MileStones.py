@@ -67,4 +67,16 @@ class Enemy:
         self.t.speed(0)
         self.spawn()
         self.t.onclick(self.hit)
-        
+
+    def spawn(self):
+        self.Lane = rand.choice(Lanes)
+        self.t.goto(300, self.Lane)
+
+    def move(self):
+        if self.hp > 0:
+            new_x = self.t.xcor() - self.speed
+            self.t.setx(new_x)
+            if new_x <= -300:
+                self.reach_base()
+        else:
+            self.destroy()
