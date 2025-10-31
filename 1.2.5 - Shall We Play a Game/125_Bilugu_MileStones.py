@@ -51,7 +51,7 @@ def Draw_Lanes():
         Lane_Drawer.goto(300, y)
         Lane_Drawer.penup()
 
-#Secondary TODO's: Enemy functions
+#Secondary TODO's: Enemy functions, PowerUp functions
 
 #Enemy Classification
 class Enemy:
@@ -101,3 +101,13 @@ class Enemy:
         self.t.hideturtle()
         if self in Enemies:
             Enemies.remove(self)
+#PowerUp Classification:
+PowerUps = []
+
+class PowerUp:
+    def __init__(self, kind):
+        self.kind = kind
+        self.t = trtl.Turtle()
+        self.t.hideturtle()
+        self.t.penup()
+        self.t.speed(0)
