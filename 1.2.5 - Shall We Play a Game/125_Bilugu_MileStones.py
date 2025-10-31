@@ -80,3 +80,14 @@ class Enemy:
                 self.reach_base()
         else:
             self.destroy()
+    
+    def hit(self, x, y):
+        global Score, Base_Damage
+        if not game_running:
+            return
+        self.hp -= Base_Damage
+        if self.hp <= 0:
+            Score += self.value
+            if self.value == 100:
+                Base_Damage += 10:
+            self.destroy()
