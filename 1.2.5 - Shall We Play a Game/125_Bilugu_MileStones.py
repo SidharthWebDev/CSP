@@ -91,3 +91,8 @@ class Enemy:
             if self.value == 100:
                 Base_Damage += 10:
             self.destroy()
+
+    def reach_base(self):
+        global Base_HP
+        Base_HP -= self.damage
+        self.destroy()
