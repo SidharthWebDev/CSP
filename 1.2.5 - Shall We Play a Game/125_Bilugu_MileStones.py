@@ -89,10 +89,15 @@ class Enemy:
         if self.hp <= 0:
             Score += self.value
             if self.value == 100:
-                Base_Damage += 10:
+                Base_Damage += 10
             self.destroy()
 
     def reach_base(self):
         global Base_HP
         Base_HP -= self.damage
         self.destroy()
+
+    def destroy(self):
+        self.t.hideturtle()
+        if self in Enemies:
+            Enemies.remove(self)
