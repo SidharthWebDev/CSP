@@ -102,6 +102,23 @@ class Enemy:
         self.t.hideturtle()
         if self in Enemies:
             Enemies.remove(self)
+
+#Bonus TODO: Super Boss Enemy
+
+#Super Boss Classification
+class Super_Boss:
+    def __init__(self):
+        self.hp = 10000
+        self.speed = 0.25
+        self.damage = Base_HP
+        self.t = trtl.Turtle()
+        self.t.shape("circle")
+        self.t.color("darkred")
+        self.t.shapesize(10, 10)
+        self.t.penup()
+        self.t.goto(300, 0)
+        self.t.onclick(self.hit)
+        self.active = True
 #PowerUp Classification:
 PowerUps = []
 
@@ -128,7 +145,7 @@ class PowerUp:
             self.t.shapesize(2, 0.6)
             self.t.color("cyan")
             self.value = 40
-        elif self.t.kind == "skull":
+        elif self.kind == "skull":
             self.t.shape("circle")
             self.t.shapesize(3, 3)
             self.t.color("white")
@@ -138,11 +155,11 @@ class PowerUp:
         self.x = rand.randint(-250, 250)
         self.t.goto(self.x, self.Lane)
         self.t.showturtle()
-        self.t.onclik(self.collect)
+        self.t.onclick(self.collect)
 
         if "Easy" in difficulty_positions[0]:
             self.duration = 5000
-        elif "Medium" in difficulty_positions[0]:
+        elif "Medium" in difficulty_positions[1]:
             self.duration = 4000
         else:
             self.duration = 3000
@@ -159,7 +176,7 @@ class PowerUp:
                 if e.value != 100:
                     gained_points += e.value
                     e.destroy()
-            Score += gained_points
+                Score += gained_points
         self.remove()
 
     def remove(self):
@@ -257,7 +274,7 @@ def update_enemies():
     if Base_HP > 0 and Remaining_Time > 0:
         for e in Enemies[:]:
             e.move()
-        draw_stats
+        draw_stats()
         wn.update()
         wn.ontimer(update_enemies, 50)
     else:
@@ -283,7 +300,7 @@ def show_start_screen():
     writer.goto(0, 50)
     writer.write("Click Defense", align="center", font=("Arial", 28, "bold"))
     writer.goto(0, -20)
-    writer.write("Click anywhere to start", align="center", font=("Arial", 28, "normal"))
+    writer.write("Click anywhere to start", align="center", font=("Arial", 18, "normal"))
     wn.onclick(show_instruction_screen)
 
 #Instruction Screen
@@ -328,15 +345,15 @@ def select_difficulty(x, y):
             if name == "Easy":
                 chosen_lanes_temp = [-75, 0, 75]
                 chosen_enemies_temp = ["E1", "E2"]
-                chosen_spawn_interval_temp = 7000
+                chosen_spawn_interval_temp = 2250
             elif name == "Medium":
                 chosen_lanes_temp = [-150, -75, 0, 75, 150]
                 chosen_enemies_temp = ["E1", "E2", "E3"]
-                chosen_spawn_interval_temp = 5000
+                chosen_spawn_interval_temp = 1500
             else:
                 chosen_lanes_temp = All_Lanes[:]
                 chosen_enemies_temp = ["E1", "E2", "E3", "Boss"]
-                chosen_spawn_interval_temp = 3000
+                chosen_spawn_interval_temp = 750
             show_game_length_screen()
             break
     global difficulty_bonus
@@ -354,7 +371,7 @@ def show_game_length_screen():
     writer.write("Select Game Length", align="center", font=("Arial", 24, "bold"))
 
     lengths = [("Blitz", 30), ("Normal", 60), ("Long", 120), ("Extra Long", 180)]
-    positions = [50, 0, -50, 100]
+    positions = [50, 0, -50, -100]
     global length_positions
     length_positions = list(zip(lengths, positions))
     for (name, duration), pos in length_positions:
