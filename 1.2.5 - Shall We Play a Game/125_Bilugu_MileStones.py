@@ -18,6 +18,8 @@ available_enemy_types = ["E1", "E2", "E3", "Boss"]
 difficulty_bonus = 0
 length_bonus = 0
 Base_Damage = 5
+Super_Boss_Spawned = False
+SuperBoss = None
 
 #Storage For Difficulty Selection
 chosen_lanes_temp = []
@@ -119,6 +121,33 @@ class Super_Boss:
         self.t.goto(300, 0)
         self.t.onclick(self.hit)
         self.active = True
+    
+    def move(self):
+        if not self.active:
+            return
+        new_x = self.t.xcor() - self.speed
+        self.t.setx(new_x)
+        if new_x <= -300:
+            self.reach_base()
+
+    def hit(self, x, y):
+        if not self.active or not game_running:
+            return
+        global Score
+        self.hp -= Base_Damage
+        if self.hp <= 0:
+            Score += 1000
+            self.destroy()
+            game_over(True)
+
+    def reach_base(self):
+        self.destroy()
+        game_over(False)
+
+    def destroy(self):
+        self.t.hideturtle()
+        self.active = False
+
 #PowerUp Classification:
 PowerUps = []
 
