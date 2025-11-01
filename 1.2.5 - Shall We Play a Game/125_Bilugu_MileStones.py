@@ -274,7 +274,7 @@ def countdown():
     else:
         game_over(Base_HP > 0)
 
-#Quaternary TODO's: Develop Start Screen, Develop Instruction Screen
+#Quaternary TODO's: Develop Start Screen, Develop Instruction Screen, Developed Difficulty Selection Screen
 
 #Start Screen
 def show_start_screen():
@@ -303,3 +303,19 @@ def show_instruction_screen(x=None, y=None):
     writer.write("Click anywhere to proceed.", align="center", font=("Arial", 20, "normal"))
     wn.onclick(show_difficulty_screen)
 
+#Difficulty Selection Screen
+def show_difficulty_screen(x=None, y=None):
+    writer.clear()
+    writer.goto(0, 100)
+    writer.write("Select Difficulty", align="center", font=("Arial", 24, "bold"))
+
+    difficulties = ["Easy", "Medium", "Hard"]
+    positions = [50, -20, -90]
+    global difficulty_positions
+    difficulty_positions = list(zip(difficulties, positions))
+
+    for name, pos in difficulty_positions:
+        writer.goto(0, pos)
+        writer.write(name, align="center", font=("Arial", 18, "bold"))
+
+    wn.onclick(select_difficulty)
