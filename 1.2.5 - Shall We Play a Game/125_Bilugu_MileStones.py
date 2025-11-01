@@ -196,3 +196,29 @@ def spawn_enemy():
         e.t.shapesize(3, 3)
     Enemies.append(e)
     wn.ontimer(spawn_enemy, spawn_interval)
+
+def spawn_powerup():
+    if not game_running:
+        return
+    kind = rand.choices(
+        population=["small", "medium", "large", "skull"],
+        weights=[50, 30, 15, 5],
+        k=1
+    )[0]
+
+    p=PowerUp(kind)
+    PowerUps.append(p)
+
+    wn.ontimer(spawn_powerup, rand.randint(5000, 15000))
+
+#Tertiary TODO's: Draw Game Stats
+def draw_stats():
+    writer.clear()
+    writer.goto(-250, 250)
+    writer.write(f"Base HP: {Base_HP}", align="center", font=("Arial", 18, "bold"))
+    writer.goto(-125, 250)
+    writer.write(f"Time: {Remaining_Time}", align="center", font=("Arial", 18, "bold"))
+    writer.goto(75, 250)
+    writer.write(f"Base Damage: {Base_Damage}", align="center", font=("Arial", 18, "bold"))
+    writer.goto(250, 250)
+    writer.write(f"Score: {Score}", align="center", font=("Arial", 18, "bold"))
