@@ -309,17 +309,41 @@ def update_enemies():
     else:
         game_over(Base_HP > 0)
 
+#Update Super Boss
+def update_Super_Boss():
+    if not game_running or not SuperBoss.active:
+        return
+    SuperBoss.move()
+    draw_stats()
+    wn.update()
+    wn.ontimer(update_Super_Boss, 50)
+
 #Countdown Timer
 def countdown():
-    global Remaining_Time
+    global Remaining_Time, Super_Boss_Spawned, SuperBoss
     if not game_running:
         return
     if Remaining_Time > 0 and Base_HP > 0:
         Remaining_Time -= 1
+        if Remaining_Time == 30 and "Hard" in [d[0] for d in difficulty_positions] and Game_Duration == 180:
+            if not Super_Boss_Spawned:
+                Spawn_Super_Boss()
         wn.ontimer(countdown, 1000)
     else:
         game_over(Base_HP > 0)
 
+#Super Boss Spawn Function
+def Spawn_Super_Boss():
+    global Super_Boss_Spawned, SuperBoss, Enemies, PowerUps
+    Super_Boss_Spawned = True
+    for e in Enemies[:]:
+        e.t.hideturtle()
+    Enemies.clear()
+    for p in PowerUps[:]:
+        p.destroy()
+    PowerUps.clear()
+    SuperBoss = Super_Boss()
+    update_Super_Boss()
 #Quaternary TODO's: Develop Start Screen, Develop Instruction Screen, Develop Difficulty Selection Screen, Distiniguish Difficulties By Game Play, Add Game Length Selection Screen
 
 #Start Screen
