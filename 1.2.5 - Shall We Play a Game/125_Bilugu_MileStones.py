@@ -111,3 +111,24 @@ class PowerUp:
         self.t.hideturtle()
         self.t.penup()
         self.t.speed(0)
+
+        if self.kind == "small":
+            self.t.shape("circle")
+            self.t.shapesize(1, 0.3)
+            self.t.color("green")
+            self.value = 10
+        elif self.kind == "medium":
+            self.t.shape("circle")
+            self.t.shapesize(1.5, 0.45)
+            self.t.color("blue")
+            self.value = 20
+        elif self.kind == "large":
+            self.t.shape("circle")
+            self.t.shapesize(2, 0.6)
+            self.t.color("cyan")
+            self.value = 40
+        elif self.t.kind == "skull":
+            self.t.shape("circle")
+            self.t.shapesize(3, 3)
+            self.t.color("white")
+            self.value = None
