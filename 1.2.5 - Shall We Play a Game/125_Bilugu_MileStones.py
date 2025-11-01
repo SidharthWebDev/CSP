@@ -1,5 +1,6 @@
 #Primary TODO's: Import necessary imports, add essential game variables, create the background
 
+#Imports
 import turtle as trtl
 import random as rand
 
@@ -212,6 +213,7 @@ def spawn_powerup():
     wn.ontimer(spawn_powerup, rand.randint(5000, 15000))
 
 #Tertiary TODO's: Draw Game Stats, Create Game Over Function, Update Enemies Function, Countdown Timer
+
 #Draw Stats
 def draw_stats():
     writer.clear()
@@ -272,4 +274,32 @@ def countdown():
     else:
         game_over(Base_HP > 0)
 
+#Quaternary TODO's: Develop Start Screen, Develop Instruction Screen
+
+#Start Screen
+def show_start_screen():
+    writer.clear()
+    Lane_Drawer.clear()
+    writer.goto(0, 50)
+    writer.write("Click Defense", align="center", font=("Arial", 28, "bold"))
+    writer.goto(0, -20)
+    writer.write("Click anywhere to start", align="center", font=("Arial", 28, "normal"))
+    wn.onclick(show_instruction_screen)
+
+#Instruction Screen
+def show_instruction_screen(x=None, y=None):
+    writer.clear()
+    writer.goto(0, 200)
+    writer.write("HOW TO PLAY", align="center", font=("Arial", 28, "bold"))
+    writer.goto(0, 175)
+    writer.write("Enemies spawn on the right side of the screen.", align="center", font=("Arial", 20, "normal"))
+    writer.goto(0, 150)
+    writer.write("They will approach your base, which is on the left side of the screen.", align="center", font=("Arial", 20, "normal"))
+    writer.goto(0, 125)
+    writer.write("Enemies will die after being clicked on enough times.", align="center", font=("Arial", 20, "normal"))
+    writer.goto(0, 100)
+    writer.write("Protect your base until the timer runs out.", align="center", font=("Arial", 20, "normal"))
+    writer.goto(0, 75)
+    writer.write("Click anywhere to proceed.", align="center", font=("Arial", 20, "normal"))
+    wn.onclick(show_difficulty_screen)
 
