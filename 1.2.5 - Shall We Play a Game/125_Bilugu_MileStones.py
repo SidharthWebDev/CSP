@@ -183,3 +183,16 @@ def spawn_enemy():
             weights.append(10)
 
     enemy_type = rand.choices(population=available_enemy_types, weights=weights, k=1)[0]
+
+    if enemy_type == "E1":
+        e = Enemy(10, 4, 10, 10, "yellow")
+    elif enemy_type == "E2":
+        e = Enemy(20, 2.5, 20, 20, "orange")
+    elif enemy_type == "E3":
+        e = Enemy(60, 2, 60, 60, "red")
+        e.t.shapesize(1.5, 2.5)
+    else:
+        e = Enemy(100, 0.5, 100, 100, "purple")
+        e.t.shapesize(3, 3)
+    Enemies.append(e)
+    wn.ontimer(spawn_enemy, spawn_interval)
