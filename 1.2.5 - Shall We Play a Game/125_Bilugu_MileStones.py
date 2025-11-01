@@ -274,7 +274,7 @@ def countdown():
     else:
         game_over(Base_HP > 0)
 
-#Quaternary TODO's: Develop Start Screen, Develop Instruction Screen, Developed Difficulty Selection Screen
+#Quaternary TODO's: Develop Start Screen, Develop Instruction Screen, Develop Difficulty Selection Screen, Distiniguish Difficulties By Game Play
 
 #Start Screen
 def show_start_screen():
@@ -319,3 +319,30 @@ def show_difficulty_screen(x=None, y=None):
         writer.write(name, align="center", font=("Arial", 18, "bold"))
 
     wn.onclick(select_difficulty)
+
+#Handle Difficulty Selection
+def select_difficulty(x, y):
+    global chosen_lanes_temp, chosen_enemies_temp, chosen_spawn_interval_temp
+    for name, pos in difficulty_positions:
+        if pos-20 < y < pos+20:
+            if name == "Easy":
+                chosen_lanes_temp = [-75, 0, 75]
+                chosen_enemies_temp = ["E1", "E2"]
+                chosen_spawn_interval_temp = 7000
+            elif name == "Medium":
+                chosen_lanes_temp = [-150, -75, 0, 75, 150]
+                chosen_enemies_temp = ["E1", "E2", "E3"]
+                chosen_spawn_interval_temp = 5000
+            else:
+                chosen_lanes_temp = All_Lanes[:]
+                chosen_enemies_temp = ["E1", "E2", "E3", "Boss"]
+                chosen_spawn_interval_temp = 3000
+            show_game_length_screen()
+            break
+    global difficulty_bonus
+    if name == "Easy":
+        difficulty_bonus = 10
+    elif name == "Medium":
+        difficulty_bonus = 25
+    else:
+        difficulty_bonus = 50
