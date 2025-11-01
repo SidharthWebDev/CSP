@@ -211,7 +211,8 @@ def spawn_powerup():
 
     wn.ontimer(spawn_powerup, rand.randint(5000, 15000))
 
-#Tertiary TODO's: Draw Game Stats
+#Tertiary TODO's: Draw Game Stats, Create Game Over Function
+#Draw Stats
 def draw_stats():
     writer.clear()
     writer.goto(-250, 250)
@@ -222,3 +223,27 @@ def draw_stats():
     writer.write(f"Base Damage: {Base_Damage}", align="center", font=("Arial", 18, "bold"))
     writer.goto(250, 250)
     writer.write(f"Score: {Score}", align="center", font=("Arial", 18, "bold"))
+
+#Game Over
+def game_over(victory):
+    global game_running, Enemies, PowerUps
+    game_running = False
+    for e in Enemies[:]:
+        e.destroy()
+    Enemies.clear()
+    writer.clear()
+    for p in PowerUps[:]:
+        p.destroy()
+    PowerUps.clear()
+    Lane_Drawer.clear()
+    wn.update()
+    wn.onclick(None)
+    writer.goto(0, 0)
+    if victory:
+        final_score = Score + difficulty_bonus + length_bonus
+        writer.write("Victory", align="center", font=("Arial", 28, "bold"))
+        writer.goto(0, -40)
+        writer.write(f"Final Score: {final_score}", align="center", font=("Arial", 28, "bold"))
+    else:
+        writer.write("Defeat", align="center", font=("Arial", 28, "bold"))
+    wn.ontimer(show_start_screen, 5000)
