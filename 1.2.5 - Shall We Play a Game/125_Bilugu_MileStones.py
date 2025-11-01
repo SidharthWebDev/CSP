@@ -362,3 +362,22 @@ def show_game_length_screen():
         writer.write(name, align="center", font=("Arial", 18, "bold"))
 
     wn.onclick(select_game_length)
+
+#Handle Game Length Selection
+def select_game_length(x, y):
+    global Game_Duration, Remaining_Time, length_bonus
+    for (name, duration), pos in length_positions:
+        if pos-20 < y < pos+20:
+            Game_Duration = duration
+            Remaining_Time = Game_Duration
+            if name == "Blitz":
+                length_bonus = 50
+            elif name == "Normal":
+                length_bonus = 100
+            elif name == "Long":
+                length_bonus = 200
+            else:
+                length_bonus = 300
+            start_game_difficulty(chosen_lanes_temp, chosen_enemies_temp, chosen_spawn_interval_temp)
+            break
+
