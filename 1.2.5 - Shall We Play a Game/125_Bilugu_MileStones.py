@@ -274,7 +274,7 @@ def countdown():
     else:
         game_over(Base_HP > 0)
 
-#Quaternary TODO's: Develop Start Screen, Develop Instruction Screen, Develop Difficulty Selection Screen, Distiniguish Difficulties By Game Play
+#Quaternary TODO's: Develop Start Screen, Develop Instruction Screen, Develop Difficulty Selection Screen, Distiniguish Difficulties By Game Play, Add Game Length Selection Screen
 
 #Start Screen
 def show_start_screen():
@@ -346,3 +346,19 @@ def select_difficulty(x, y):
         difficulty_bonus = 25
     else:
         difficulty_bonus = 50
+
+#Game Length Selection Screen
+def show_game_length_screen():
+    writer.clear()
+    writer.goto(0, 100)
+    writer.write("Select Game Length", align="center", font=("Arial", 24, "bold"))
+
+    lengths = [("Blitz", 30), ("Normal", 60), ("Long", 120), ("Extra Long", 180)]
+    positions = [50, 0, -50, 100]
+    global length_positions
+    length_positions = list(zip(lengths, positions))
+    for (name, duration), pos in length_positions:
+        writer.goto(0, pos)
+        writer.write(name, align="center", font=("Arial", 18, "bold"))
+
+    wn.onclick(select_game_length)
