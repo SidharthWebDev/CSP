@@ -167,3 +167,19 @@ class PowerUp:
             self.t.clear()
             PowerUps.remove(self)
 
+#Spawn Enemy
+def spawn_enemy():
+    if not game_running:
+        return
+    weights = []
+    for etype in available_enemy_types:
+        if etype == "E1":
+            weights.append(40)
+        elif etype == "E2":
+            weights.append(30)
+        elif etype == "E3":
+            weights.append(20)
+        elif etype == "Boss":
+            weights.append(10)
+
+    enemy_type = rand.choices(population=available_enemy_types, weights=weights, k=1)[0]
