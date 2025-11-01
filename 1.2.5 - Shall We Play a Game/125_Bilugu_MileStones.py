@@ -211,7 +211,7 @@ def spawn_powerup():
 
     wn.ontimer(spawn_powerup, rand.randint(5000, 15000))
 
-#Tertiary TODO's: Draw Game Stats, Create Game Over Function
+#Tertiary TODO's: Draw Game Stats, Create Game Over Function, Update Enemies Function
 #Draw Stats
 def draw_stats():
     writer.clear()
@@ -247,3 +247,18 @@ def game_over(victory):
     else:
         writer.write("Defeat", align="center", font=("Arial", 28, "bold"))
     wn.ontimer(show_start_screen, 5000)
+
+#Update Enemies
+def update_enemies():
+    if not game_running:
+        return
+    if Base_HP > 0 and Remaining_Time > 0:
+        for e in Enemies[:]:
+            e.move()
+        draw_stats
+        wn.update()
+        wn.ontimer(update_enemies, 50)
+    else:
+        game_over(Base_HP > 0)
+
+
