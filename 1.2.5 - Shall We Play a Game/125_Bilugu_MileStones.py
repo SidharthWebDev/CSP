@@ -132,3 +132,18 @@ class PowerUp:
             self.t.shapesize(3, 3)
             self.t.color("white")
             self.value = None
+
+        self.Lane = rand.choice(Lanes)
+        self.x = rand.randint(-250, 250)
+        self.t.goto(self.x, self.Lane)
+        self.t.showturtle()
+        self.t.onclik(self.collect)
+
+        if "Easy" in difficulty_positions[0]:
+            self.duration = 5000
+        elif "Medium" in difficulty_positions[0]:
+            self.duration = 4000
+        else:
+            self.duration = 3000
+
+        wn.ontimer(self.remove, self.duration)
