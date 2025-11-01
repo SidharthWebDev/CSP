@@ -211,7 +211,7 @@ def spawn_powerup():
 
     wn.ontimer(spawn_powerup, rand.randint(5000, 15000))
 
-#Tertiary TODO's: Draw Game Stats, Create Game Over Function, Update Enemies Function
+#Tertiary TODO's: Draw Game Stats, Create Game Over Function, Update Enemies Function, Countdown Timer
 #Draw Stats
 def draw_stats():
     writer.clear()
@@ -258,6 +258,17 @@ def update_enemies():
         draw_stats
         wn.update()
         wn.ontimer(update_enemies, 50)
+    else:
+        game_over(Base_HP > 0)
+
+#Countdown Timer
+def countdown():
+    global Remaining_Time
+    if not game_running:
+        return
+    if Remaining_Time > 0 and Base_HP > 0:
+        Remaining_Time -= 1
+        wn.ontimer(countdown, 1000)
     else:
         game_over(Base_HP > 0)
 
