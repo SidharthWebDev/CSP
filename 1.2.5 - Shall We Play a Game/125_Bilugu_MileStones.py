@@ -147,3 +147,23 @@ class PowerUp:
             self.duration = 3000
 
         wn.ontimer(self.remove, self.duration)
+
+    def collect(self, x, y):
+        global Base_HP, Score, Enemies
+        if self.kind in ["small", "medium", "large"]:
+            Base_HP += self.value
+        elif self.kind == "skull":
+            gained_points = 0
+            for e in Enemies[:]:
+                if e.value != 100:
+                    gained_points += e.value
+                    e.destroy()
+            Score += gained_points
+        self.remove()
+
+    def remove(self):
+        if self in PowerUps:
+            self.t.hideturtle()
+            self.t.clear()
+            PowerUps.remove(self)
+
