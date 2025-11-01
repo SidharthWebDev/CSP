@@ -381,3 +381,28 @@ def select_game_length(x, y):
             start_game_difficulty(chosen_lanes_temp, chosen_enemies_temp, chosen_spawn_interval_temp)
             break
 
+#Begin Game With Chosen Difficulty
+def start_game_difficulty(chosen_lanes, chosen_enemies, chosen_interval):
+    global game_running, Base_HP, Base_Damage, Score, Remaining_Time, Lanes, available_enemy_types, spawn_interval, PowerUps
+    wn.onclick(None)
+    writer.clear()
+    Lane_Drawer.clear()
+    PowerUps.clear()
+    Base_HP = 100
+    Score = 0
+    Base_Damage = 5
+    Remaining_Time = Game_Duration
+    Lanes = chosen_lanes
+    available_enemy_types = chosen_enemies
+    spawn_interval = chosen_interval
+    game_running = True
+    Draw_Lanes()
+    draw_stats()
+    spawn_enemy()
+    spawn_powerup()
+    update_enemies()
+    countdown()
+
+#Launch The Game
+show_start_screen()
+wn.mainloop()
